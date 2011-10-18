@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- SOURCE: http://fiddle.jshell.net/phms/nWdzR/ -->
+
+
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>_trackWindowJsError with GA - jsFiddle demo by phms</title>
+  <script type='text/javascript' src='/js/lib/dummy.js'></script>
+  
+  
+  <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  
+  <style type='text/css'>
+    
+  </style>
+  
+  <script type='text/javascript'>
+  //<![CDATA[ 
+  
+  function _addEventListener(obj, evt, ofnc, bubble) {
+
+    /* Adapted from https://bitbucket.org/dpc/gas/ */
+
+    var fnc = function(event) {
+        if (!event || !event.target) {
+            event = window.event;
+            event.target = event.srcElement;
+        }
+        return ofnc.call(obj, event);
+    };
+    // W3C model
+    if (obj.addEventListener) {
+        obj.addEventListener(evt, fnc, !! bubble);
+        return true;
+    }
+    // M$ft model
+    else if (obj.attachEvent) {
+        return obj.attachEvent('on' + evt, fnc);
+    }
+    // Browser doesn't support W3C or M$ft model.
+    else {
+        evt = 'on' + evt;
+        if (typeof obj[evt] === 'function') {
+            fnc = (function(f1, f2) {
+                return function() {
+                    f1.apply(this, arguments);
+                    f2.apply(this, arguments);
+                }
+            })(obj[evt], fnc);
+        }
+        obj[evt] = fnc;
+        return true;
+    }
+}
+
+function _trackWindowJsError(error) {
+    var message, url, line;
+
+    // Webkit
+    if (error && error.message) {
+        message = error.message;
+        url = error.filename;
+        line = error.lineno;
+    // Firefox e IE
+    } else {
+        message = "(message empty)";
+        url = document.location.href;
+        line = "?";
+    }
+
+    if (typeof(_gaq) === "object") {
+        _gaq.push([
+            "_trackEvent",
+            "JS Exception Error",
+            message,
+            (url + " (" + line + ")")
+            ]);
+    }
+
+    /* DEBUG */
+    alert("JS Exception Error\nMessage: " + message + "\nURL: " + url + "\nLine: " + line);
+
+    return true;
+}
+
+_addEventListener(window, "error", _trackWindowJsError, false);
+  
+  //]]> 
+  </script>
+  
+</head>
+<body>
+  <h1>_trackWindowJsError with GA</h1>
+<p><b>Tracking the errors in window with event listener and GA.</b></p>
+
+<script type="text/javascript">
+    /* Traditional snippet of Google Analytics Tracking Code */
+    
+    var _gaq = _gaq || [];
+    _gaq.push(
+        ['_setAccount','UA-XXXXX-X'],
+        ['_trackPageview']
+    );
+    
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'http://www.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
+
+
+<script type="text/javascript">
+    var i = 1/new_variable; // Error!
+</script>
+
+
+
+<p>This script should not be used in the "try / catch" statement.<br>
+Don't forget to remove the "alert"!</p>
+<p><b>Compatibility:</b></p>
+<ul>
+    <li>Chrome - OK</li>
+    <li>Firefox - Partial</li>
+    <li>Internet Explorer - Partial</li>
+    <li>Safari - OK</li>
+    <li>Opera - Fail</li>
+</ul>
+<p><b>To others suggestions about error tracking, consult:</b></p>
+<ul>
+    <li>http://jsfiddle.net/phms/D7GPs/</li>
+    <li>http://jsfiddle.net/phms/GAyrK/</li>
+    <li>http://jsfiddle.net/phms/nWdzR/</li>
+    <li>http://jsfiddle.net/phms/tuQdd/</li>
+</ul>
+  
+</body>
+
+
+</html>
+

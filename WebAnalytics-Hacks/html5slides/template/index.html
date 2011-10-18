@@ -21,39 +21,32 @@
     <script src='../slides.js'></script>
     <script src='../jquery.js'></script>
     <script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-15588855-5']);
+	  _gaq.push(['_trackPageview']);
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-15588855-5']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+    </script>
+    <style>  
+      button {
+        background: url(../images/btn_stretch.png) repeat-x left top green;
+        font-family: 'Open Sans', Arial, sans-serif;
+        text-align: center;
+        font-size: 0.9em;
+        height: 44px;
+        width: 150px;
+        color: white;
+      }    
+    </style>
   </head>
-
-  <style>
-       
-    button{
-       padding: 10px 30px;
-       font-size: 0.9em;
-       background-color: lightgreen;
-    }
-    
-    
-  </style>
 
   <body style='display: none'>
 
     <section class='slides layout-regular template-intercon'>
-      
-      <!-- Your slides (<article>s) go here. Delete or comment out the
-           slides below. -->
-        
-        
       
       <article class='biglogo'>
           <img src="../images/cp_logo.png" width="300px" />
@@ -74,9 +67,17 @@
           <br>
           Luiz Yamada
           <br>
+          <br>
           22 de Outubro de 2011
         </p>
       </article>
+
+
+	  <!-- AJAX Tracking - Eduardo Cereto -->
+
+      <article>
+        <h2>AJAX Tracking</h2>
+      </article> 
       
       <article>
         <h3>AJAX Tracking</h3>
@@ -134,8 +135,150 @@ jqxhr.success(function(data) {
         <button onClick="button_run('ajax_3')">Run</button>
       </article>
 
+
+ 	  <!-- Error Tracking - Fabio Serra  -->
+ 	  
+	<script type='text/javascript'>
+		function _trackJsError(exception) { // http://jsfiddle.net/phms/D7GPs/
+			exception = exception || {};
+			if (typeof(_gaq) === "object") {
+				_gaq.push(['_trackEvent', 'JS Exception ' + (exception.name || 'Error'), (exception.message || exception), document.location.href ]);
+			}
+			//debug 
+			alert('JS Exception ' + (exception.name || 'Error') + "\n\nMessage: " + (exception.message || exception || '(message empty)')  + "\n\nURL: " + document.location.href);
+		}
+		
+		function start_window_onerror() { // funcao de apoio
+			window.onerror = function(message, url, line) { // http://jsfiddle.net/phms/GAyrK/
+				if (typeof(_gaq) === "object") {
+					_gaq.push(["_trackEvent",
+						"JS Exception Error",
+						message,
+						(url + " (" + line + ")") ]);
+				}
+				//debug
+				alert("JS Exception Error\n\nMessage: " + message + "\n\nURL: " + url + "\n\nLine: " + line);
+		
+				return true;
+			};
+		}
+		function stop_window_onerror() { // funcao de apoio
+			window.onerror = none;
+		}
+	</script>
+
       <article>
-        <h3>AJAX Tracking</h3>
+        <h2>JS Error Tracking</h2>
+      </article>
+
+      <article>
+      <h3>JS Error Tracking</h3>
+		<p>Problema de códigos client-side, mesmos com todos os testes <b>nem tudo pode ser validado</b>.
+		
+		<ul class="build">
+          <li>
+            Todos os navegadores e suas infinidades de versões
+          </li>
+          <li>
+            Diversos dispositivos, como celulares e tablets
+          </li>
+          <li>
+            Velocidade da conexão e impactos nos timeouts
+          </li>
+          <li>
+            Regras de firewall ou proxy
+          </li>
+        </ul>
+        
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        
+        <div class="build">
+        	<p>Seria ótimo uma forma de acompanhar os erros de Javascript da mesma forma que analiso 
+        	um log de erros do Apache...</p>
+		</div>
+	</article>
+      
+     <article class='smaller'>
+        <h3>A solução mais óbvia</h3>
+        <p>Compatível com todos os navegadores</p>
+       
+       <pre>
+function _trackJsError(exception) {
+    exception = exception || {};
+    if (typeof(_gaq) === "object") {
+        _gaq.push(['_trackEvent',
+             'JS Exception ' + (exception.name || 'Error'),
+             (exception.message || exception), 
+             document.location.href ]);
+    }
+    //debug 
+    alert('JS Exception ' + (exception.name || 'Error') + 
+    	"\n\nMessage: " + (exception.message || exception || '(message empty)') +
+    	"\n\nURL: " + document.location.href);
+}</pre>
+       
+        <pre id="error_1">
+try {
+    var i = 1/new_variable; // Error!
+}
+catch (e) { _trackJsError(e); }</pre>
+        <button onClick="button_run('error_1')">Run</button>
+      </article>
+
+
+     <article class='smaller'>
+        <h3>Solução Global</h3>
+        <p>Compatível com todos os navegadores (exceto Opera)</p>
+       
+       <pre>
+window.onerror = function(message, url, line) {
+    if (typeof(_gaq) === "object") {
+        _gaq.push(["_trackEvent",
+            "JS Exception Error",
+            message,
+            (url + " (" + line + ")") ]);
+    }
+    //debug
+    alert("JS Exception Error \n\nMessage: " + message + 
+    	"\n\nURL: " + url + "\n\nLine: " + line);
+    
+    return true;
+};</pre>
+       
+        <pre id="error_2">
+var i = 1/new_variable; // Error!</pre>
+        <button onClick="start_window_onerror();button_run('error_2');stop_window_onerror();">Run</button>
+      </article>
+      
+      
+     <article class='smaller'>
+        <h3>Solução Global com addEventListener</h3>
+        <p>Compatível apenas com Webkit e parcialmente com Firefox e IE</p>
+        <pre>
+        
+_addEventListener(window, "error", _trackWindowJsError, false);
+ 
+</pre>
+        <p>Para o código completo: <a href="http://jsfiddle.net/phms/nWdzR/">http://jsfiddle.net/phms/nWdzR/</a></p>
+
+        <p>&nbsp;</p>       
+        <p>&nbsp;</p>
+        
+        <p>Compatível apenas com Webkit e parcialmente com Firefox</p>
+        <pre>
+        
+jQuery(window).error(_trackWindowJsError);
+ 
+</pre>
+        <p>Para o código completo: <a href="http://jsfiddle.net/phms/tuQdd/">http://jsfiddle.net/phms/tuQdd/</a></p>
+      </article>
+
+
+ 	  <!-- Facebook Tracking - Luiz Yamada  -->
+
+      <article>
+        <h2>Facebook Tracking (ou outro nome)</h2>
       </article>
 
       <article>
