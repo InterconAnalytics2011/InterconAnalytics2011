@@ -278,20 +278,100 @@ jQuery(window).error(_trackWindowJsError);
  	  <!-- Facebook Tracking - Luiz Yamada  -->
 
       <article>
-        <h2>Facebook Tracking (ou outro nome)</h2>
+        <h2>Traffic Source on Facebook Fan Page</h2>
       </article>
 
       <article>
-        <p>
-          This is a slide with just text. This is a slide with just text.
-          This is a slide with just text. This is a slide with just text.
-          This is a slide with just text. This is a slide with just text.
-        </p>
-        <p>
-          There is more text just underneath.
-        </p>
+		<h1>
+			O problema:
+		</h1>
+        <h2>
+			Mensurar as fontes de tráfego de campanhas que levam o usuário para uma fanpage no Facebook
+        </h2>
       </article>
+	  <article>
+	  <h3>Traffic Source on Facebook Fan Page</h3>
+	  <div class="build">
+            <img style='position:absolute;top:100px;left:30px' src='images/ly-facebook-screen.png'>
+            <img style='position:absolute;top:100px;left:30px' src='images/ly-iframe-box.png'>
+			<img style='position:absolute;top:100px;left:30px' src='images/ly-iframe-path.png'>
+			<img style='position:absolute;top:100px;left:30px' src='images/ly-iframe-traffic-source.png'>
+       </div>
+	  </article>
 
+	  <article>
+		<h3>Traffic Source on Facebook Fan Page</h3>
+        <h1>
+			Solução:
+		</h1>
+        <h2>
+		Mensurar as fontes de tráfego de campanhas que levam o usuário para uma fanpage no Facebook
+        </h2>
+
+	  </article>
+	  <article>
+		<h3>Traffic Source on Facebook Fan Page</h3>
+		<div class="build">
+            <img style='position:absolute;top:100px;left:30px' src='images/ly-sl-1.png'>
+            <img style='position:absolute;top:100px;left:30px' src='images/ly-sl-2.png'>
+			<img style='position:absolute;top:100px;left:30px' src='images/ly-sl-3.png'>
+			<img style='position:absolute;top:100px;left:30px' src='images/ly-sl-4.png'>
+			<img style='position:absolute;top:100px;left:30px' src='images/ly-sl-5.png'>
+		</div>
+	  </article>
+	  <article>
+		<h3>URL Intermediária (Exemplo em PHP)</h3>
+		<ul class="build">
+			<li>Incluir o arquivo phpga.php (disponibilizado no github)</li>
+			<li>Executar a classe que PHP
+			<pre>
+&lt;?php $ga_params = array();
+$ga = new GoogleAnlayticsMobile("UA-XXXXXXXX-X", ".domain.com", 
+NULL, $ga_params); 
+?&gt;
+&lt;?=$ga->GetTrackingCode()?&gt;</pre></li>
+			<li>Realizar o redirecionamento para a fan page
+			<pre>
+&lt;?php
+header("Location: https://www.facebook.com/pages/intercon/123?sk=app_123"); 
+?&gt;</pre></li>
+		</ul>
+	  </div>
+	  </article>
+	  <article>
+		<h3>Tag do Google Analytics dentro do iFrame</h3>
+		<p>&nbsp;</p>
+		<p>Configurar a tag do Google Analytics para ignorar o endereço do proxy do Facebook como referral</p>
+		<pre>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+_gaq.push(['_addIgnoredRef', 'static.ak.facebook.com']);
+_gaq.push(['_setDomainName', '.domain.com']);
+_gaq.push(['_trackPageview']);
+		</pre>
+	  </article>
+	  <article>
+		<h3>Compatibilidade com o IE</h3>
+		<p>&nbsp;</p>
+		<p><b>Problema:</b><br />
+		Caso a privacidade do usuário do IE estiver configurado como médio ou maior que isso, o IE irá bloquear a manipulação de cookies em sites externos que são abertos dentro de um iFrame<br /><br /></p>
+	  </article>
+	  <article>
+		<h3>Compatibilidade com o IE</h3>
+		<p><b>Solução:</b><br />
+		Enviar um header P3P na página do iFrame</p>
+		<pre>&lt;?php header('P3P: CP="IE is often a NIGHTMARE"'); ?&gt;</pre>
+		<p><b>Opcional:</b></p>
+		<ul>
+			<li><b>P3P reference file:</b> /w3c/p3p.xml</li>
+			<li><b>Full P3P policy:</b> /w3c/full-P3P-policy.xml</li>
+		</ul>
+	  </article>
+	  <article>
+		<h3>Resultado</h3>
+            <img style='position:absolute;top:100px;left:30px' src='images/ly-source.jpg'>
+	  </article>
+	<!-- End Facebook Tracking - Luiz Yamada -->
       <article>
         <h3>
           Simple slide with header and text
