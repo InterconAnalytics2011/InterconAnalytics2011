@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- SOURCE: http://fiddle.jshell.net/phms/GAyrK/ -->
-
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <title>Tracking window.onerror with GA - jsFiddle demo by phms</title>
   <script type='text/javascript' src='/js/lib/dummy.js'></script>
@@ -28,7 +26,7 @@
     }
     
     /* DEBUG */
-    alert("JS Exception Error\nMessage: " + message + "\nURL: " + url + "\nLine: " + line);
+   document.getElementById("error").innerHTML = ("JS Exception Error<br>Message: " + message + "<br>URL: " + url + "<br>Line: " + line);
     
     return true;
 };
@@ -46,7 +44,7 @@
     
     var _gaq = _gaq || [];
     _gaq.push(
-        ['_setAccount','UA-XXXXX-X'],
+        ['_setAccount','UA-17169655-2'],
         ['_trackPageview']
     );
     
@@ -57,7 +55,7 @@
     })();
 </script>
 
-
+<hr><pre id="error"></pre><hr>
 
 <script type="text/javascript">
     var i = 1/new_variable; // Error!
@@ -75,7 +73,7 @@ Don't forget to remove the "alert"!</p>
     <li>Safari - OK</li>
     <li>Opera - Fail</li>
 </ul>
-<p><b>To others suggestions about error tracking, consult:</b></p>
+<p><b>For other suggestions about error tracking, consult:</b></p>
 <ul>
     <li>http://jsfiddle.net/phms/D7GPs/</li>
     <li>http://jsfiddle.net/phms/GAyrK/</li>
