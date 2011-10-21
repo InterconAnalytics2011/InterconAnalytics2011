@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>InterCon 2011 - Google Analytics API</title>
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script src="ga-api.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js" type="text/javascript"></script>
+    <script src="jquery.tagcloud.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+  </head>
+  <body>
+  <div id="main" style="margin: 20px;">
+    <h1>Explorando a API do Google Analytics</h1>
+    <button id="authButton" class="btn">Carregando...</button>
+    <p style="height: 15px;"></p>
+    <div id="dataControls" style="display:none">
+      <p>
+        <button id="getAccount" class="btn info">Listar perfis</button>
+      </p>
+      <p>
+        <button id="getData" class="btn primary">Obter keywords</button> <input type="text" id="tableId" class="span2" /> (Table ID)
+      </p>
+    </div>
+    <div id="outputDiv"></div>
+    <img src="dummy.gif" style="display:none" alt="required for Google Data"/>
+  </div>
+  </body>
+</html>
+
