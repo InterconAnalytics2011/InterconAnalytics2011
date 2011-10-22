@@ -87,13 +87,10 @@
           código.
         </p>
         <pre id="ajax_1">
-var jqxhr = jQuery.ajax(
-  'http://search.twitter.com/search.json?rpp=10&q=intercon2011', {
-        dataType: 'jsonp'
-});
+var jqxhr = jQuery.ajax('./ajax_content.html');
 jqxhr.success(function(data) {
   //Handle data
-  alert(data.results[0].text);
+  alert(data);
 });
         </pre>
         <button onClick="button_run('ajax_1')">Run</button>
@@ -101,17 +98,16 @@ jqxhr.success(function(data) {
 
       <article>
         <h3>A solução mais óbvia</h3>
+        <p>Chamar um callback que dispara o pageview <b>TODAS AS VEZES</b> que
+        fizer uma chamada em AJAX.</p>
         <pre id="ajax_2">
-var jqxhr = jQuery.ajax(
-  'http://search.twitter.com/search.json?rpp=10&q=intercon2011', {
-        dataType: 'jsonp'
-});
+var jqxhr = jQuery.ajax('./ajax_content.html');
 jqxhr.success(function(data){
-  _gaq.push(['_trackPageview', '/vpv/twitter_updates']);
+  _gaq.push(['_trackPageview', '/ajax_content.html']);
 });
 jqxhr.success(function(data) {
   //Handle data
-  alert(data.results[0].text);
+  alert(data);
 });
         </pre>
         <button onClick="button_run('ajax_2')">Run</button>
@@ -123,13 +119,10 @@ jqxhr.success(function(data) {
 jQuery(document).ajaxSuccess(function(e, xhr, settings){
   _gaq.push(['_trackPageview', settings.url]);
 });
-var jqxhr = jQuery.ajax(
-  'http://search.twitter.com/search.json?rpp=10&q=intercon2011', {
-        dataType: 'jsonp'
-});
+var jqxhr = jQuery.ajax('./ajax_content.html');
 jqxhr.success(function(data) {
   //Handle data
-  alert(data.results[0].text);
+  alert(data);
 });
         </pre>
         <button onClick="button_run('ajax_3')">Run</button>
