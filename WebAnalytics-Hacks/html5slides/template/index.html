@@ -114,8 +114,30 @@ jqxhr.success(function(data) {
       </article>
 
       <article>
-        <h3>A jQuery simplifica</h3>
+        <h3>Função de Ajax customizada</h3>
+        <p>Criar uma função customizada de AJAX para logar as chamadas de AJAX
+        </p>
         <pre id="ajax_3">
+function gaAjax (url, settings){
+  var jx = jQuery.ajax(url, settings);
+  jx.success(function(){
+    _gaq.push(['_trackPageview', url]);
+  });
+  return jx;
+}
+var jqxhr = gaAjax('./ajax_content.html');
+jqxhr.success(function(data) {
+  //Handle data
+  alert(data);
+});
+        </pre>
+        <button onClick="button_run('ajax_3')">Run</button>
+      </article>
+
+      <article>
+        <h3>A jQuery simplifica</h3>
+        <p>A JQuery já oferece um callback global para qualquer chamada em AJAX.</p>
+        <pre id="ajax_4">
 jQuery(document).ajaxSuccess(function(e, xhr, settings){
   _gaq.push(['_trackPageview', settings.url]);
 });
@@ -125,7 +147,7 @@ jqxhr.success(function(data) {
   alert(data);
 });
         </pre>
-        <button onClick="button_run('ajax_3')">Run</button>
+        <button onClick="button_run('ajax_4')">Run</button>
       </article>
 
 
