@@ -190,7 +190,7 @@ jqxhr.success(function(data) {
       <h3>Javascript Error Tracking</h3>
 		<p>Problema de códigos client-side, mesmos com todos os testes <b>nem tudo pode ser validado</b>.
 		
-		<ul class="build">
+		<ul>
           <li>
             Todos os navegadores e suas infinidades de versões
           </li>
@@ -206,9 +206,8 @@ jqxhr.success(function(data) {
         </ul>
         
         <p>&nbsp;</p>
-        <p>&nbsp;</p>
         
-        <div class="build">
+        <div>
         	<p>Seria ótimo uma forma de acompanhar os erros de Javascript da mesma forma que analiso 
         	um log de erros do Apache...</p>
 		</div>
@@ -277,8 +276,8 @@ _addEventListener(window, "error", _trackWindowJsError, false);
 </pre>
         <p>Para o código completo: <a href="http://jsfiddle.net/phms/nWdzR/">http://jsfiddle.net/phms/nWdzR/</a></p>
 
+        <hr>
         <p>&nbsp;</p>       
-        <p>&nbsp;</p>
         
         <p>Compatível apenas com Webkit e parcialmente com Firefox</p>
         <pre>
@@ -336,9 +335,9 @@ jQuery(window).error(_trackWindowJsError);
 	  </article>
 	  <article>
 		<h3>URL Intermediária (Exemplo em PHP)</h3>
-		<ul class="build">
+		<ul>
 			<li>Incluir o arquivo phpga.php (disponibilizado no github)</li>
-			<li>Executar a classe que PHP
+			<li>Executar a classe PHP
 			<pre>
 &lt;?php $ga_params = array();
 $ga = new GoogleAnlayticsMobile("UA-XXXXXXXX-X", ".domain.com", 
@@ -389,8 +388,13 @@ _gaq.push(['_trackPageview']);
 	<!-- End Facebook Tracking - Luiz Yamada -->
       <article>
         <h1>
-          Obrigado!
+          Perguntas?
         </h1>
+        <p>
+          @eduardocereto</br>
+          @fabiophms</br>
+          @luizyamada</br>
+        </p>
       </article>
 
     </section>
