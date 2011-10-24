@@ -87,13 +87,10 @@
           código.
         </p>
         <pre id="ajax_1">
-var jqxhr = jQuery.ajax(
-  'http://search.twitter.com/search.json?rpp=10&q=intercon2011', {
-        dataType: 'jsonp'
-});
+var jqxhr = jQuery.ajax('./ajax_content.html');
 jqxhr.success(function(data) {
   //Handle data
-  alert(data.results[0].text);
+  alert(data);
 });
         </pre>
         <button onClick="button_run('ajax_1')">Run</button>
@@ -101,38 +98,56 @@ jqxhr.success(function(data) {
 
       <article>
         <h3>A solução mais óbvia</h3>
+        <p>Chamar um callback que dispara o pageview <b>TODAS AS VEZES</b> que
+        fizer uma chamada em AJAX.</p>
         <pre id="ajax_2">
-var jqxhr = jQuery.ajax(
-  'http://search.twitter.com/search.json?rpp=10&q=intercon2011', {
-        dataType: 'jsonp'
-});
+var jqxhr = jQuery.ajax('./ajax_content.html');
 jqxhr.success(function(data){
-  _gaq.push(['_trackPageview', '/vpv/twitter_updates']);
+  _gaq.push(['_trackPageview', '/ajax_content.html']);
 });
 jqxhr.success(function(data) {
   //Handle data
-  alert(data.results[0].text);
+  alert(data);
 });
         </pre>
         <button onClick="button_run('ajax_2')">Run</button>
       </article>
 
       <article>
-        <h3>A jQuery simplifica</h3>
+        <h3>Função de Ajax customizada</h3>
+        <p>Criar uma função customizada de AJAX para logar as chamadas de AJAX
+        </p>
         <pre id="ajax_3">
-jQuery(document).ajaxSuccess(function(e, xhr, settings){
-  _gaq.push(['_trackPageview', settings.url]);
-});
-var jqxhr = jQuery.ajax(
-  'http://search.twitter.com/search.json?rpp=10&q=intercon2011', {
-        dataType: 'jsonp'
-});
+function gaAjax (url, settings){
+  var jx = jQuery.ajax(url, settings);
+  jx.success(function(){
+    _gaq.push(['_trackPageview', url]);
+  });
+  return jx;
+}
+var jqxhr = gaAjax('./ajax_content.html');
 jqxhr.success(function(data) {
   //Handle data
-  alert(data.results[0].text);
+  alert(data);
 });
         </pre>
         <button onClick="button_run('ajax_3')">Run</button>
+      </article>
+
+      <article>
+        <h3>A jQuery simplifica</h3>
+        <p>A JQuery já oferece um callback global para qualquer chamada em AJAX.</p>
+        <pre id="ajax_4">
+jQuery(document).ajaxSuccess(function(e, xhr, settings){
+  _gaq.push(['_trackPageview', settings.url]);
+});
+var jqxhr = jQuery.ajax('./ajax_content.html');
+jqxhr.success(function(data) {
+  //Handle data
+  alert(data);
+});
+        </pre>
+        <button onClick="button_run('ajax_4')">Run</button>
       </article>
 
 
@@ -175,7 +190,7 @@ jqxhr.success(function(data) {
       <h3>Javascript Error Tracking</h3>
 		<p>Problema de códigos client-side, mesmos com todos os testes <b>nem tudo pode ser validado</b>.
 		
-		<ul class="build">
+		<ul>
           <li>
             Todos os navegadores e suas infinidades de versões
           </li>
@@ -191,9 +206,8 @@ jqxhr.success(function(data) {
         </ul>
         
         <p>&nbsp;</p>
-        <p>&nbsp;</p>
         
-        <div class="build">
+        <div>
         	<p>Seria ótimo uma forma de acompanhar os erros de Javascript da mesma forma que analiso 
         	um log de erros do Apache...</p>
 		</div>
@@ -262,8 +276,8 @@ _addEventListener(window, "error", _trackWindowJsError, false);
 </pre>
         <p>Para o código completo: <a href="http://jsfiddle.net/phms/nWdzR/">http://jsfiddle.net/phms/nWdzR/</a></p>
 
+        <hr>
         <p>&nbsp;</p>       
-        <p>&nbsp;</p>
         
         <p>Compatível apenas com Webkit e parcialmente com Firefox</p>
         <pre>
@@ -321,9 +335,9 @@ jQuery(window).error(_trackWindowJsError);
 	  </article>
 	  <article>
 		<h3>URL Intermediária (Exemplo em PHP)</h3>
-		<ul class="build">
+		<ul>
 			<li>Incluir o arquivo phpga.php (disponibilizado no github)</li>
-			<li>Executar a classe que PHP
+			<li>Executar a classe PHP
 			<pre>
 &lt;?php $ga_params = array();
 $ga = new GoogleAnlayticsMobile("UA-XXXXXXXX-X", ".domain.com", 
@@ -374,8 +388,16 @@ _gaq.push(['_trackPageview']);
 	<!-- End Facebook Tracking - Luiz Yamada -->
       <article>
         <h1>
-          Obrigado!
+          Perguntas?
         </h1>
+        <p>
+          @eduardocereto</br>
+          @fabiophms</br>
+          @luizyamada</br>
+        </p>
+        <p>
+          <a style="font-size:46px;" href="http://bit.ly/GAHacks">http://bit.ly/GAHacks</a>
+        </p>
       </article>
 
     </section>

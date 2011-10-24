@@ -1,0 +1,3 @@
+[submodule "WebAnalytics-Hacks/GA-Code-Samples"]
+	path = WebAnalytics-Hacks/GA-Code-Samples
+	url = git@github.com:eduardocereto/GA-Code-Samples.git
