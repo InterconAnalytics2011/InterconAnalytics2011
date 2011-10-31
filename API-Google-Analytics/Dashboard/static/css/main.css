@@ -1,0 +1,212 @@
+/* default settings */
+html, body, a, a:hover, ul, li, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-decoration: none;
+    color: #484848;
+    list-style: none;
+}
+
+/* removes vertical scrollbar */
+html {
+    overflow: auto;
+}
+ 
+body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url("/static/img/noise.jpg") 0 0 repeat;
+}
+ 
+div#wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: transparent url("/static/img/bg.jpg") center center no-repeat;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    text-shadow: #202020 1px 1px 2px;
+}
+
+h3 {
+    color: white;
+}
+
+a:hover {
+    color: #FFF;
+}
+
+div#home-step {
+    width: 50%;
+    margin-top: 250px;
+    margin-left: 20px;
+    text-align: right;
+}
+
+div#row {
+    margin: 0;
+    padding: 0;
+    width: 940px;
+    height: 313px;
+    float: left;
+}
+
+div.title {
+    width: 450px;
+    margin: 10px;
+}
+
+div#chart-title {
+    width: 920px;
+    margin-left: 10px;
+    padding-top: 10px;
+}
+
+
+div#percent-current-year-vists {
+    width: 300px;
+    height: 250px;
+    padding-top: 110px;
+    font-size: 100px;
+    font-style: italic;
+    font-weight: bold;
+    text-shadow: #202020 2px 2px 2px;
+    float: left;
+    text-align: right;
+}
+
+div#percent-current-year-vists.up {
+    color: green;
+}
+
+div#percent-current-year-vists.down {
+    color: #900000;
+}
+
+div#total-visits {
+    float: right;
+}
+
+div.year-inner-boxes {
+    width: 145px;
+    height: 117px;
+    margin: 5px;
+    margin-right: 10px;
+    background: transparent url("/static/img/inner_box.png") center center no-repeat;
+}
+
+div.inner-boxes-title {
+    width: 100%;
+    padding-top: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: #202020 2px 2px 2px;
+    color: white;
+    text-align: center;
+}
+
+div.num-total-visits {
+    width: 100%;
+    height: 95px;
+    padding-top: 30px;
+    font-size: 40px;
+    font-style: italic;
+    font-weight: bold;
+    text-shadow: #202020 2px 2px 2px;
+    color: white;
+    text-align: center;
+}
+
+div#last-month-visitors {
+    width: 235px;
+    height: 250px;
+    float: left;
+}
+
+div#current-month-visitors {
+    width: 235px;
+    height: 250px;
+    float: left;
+}
+
+div.top-row {
+    width: 470px;
+    height: 313px;
+    margin: 0px;
+    float: left;
+    background: transparent url("/static/img/tag_cloud_bg.png") center center no-repeat;
+}
+
+div#chart {
+    width: 940px;
+    height: 313px;
+    margin: 0;
+    background: transparent url("/static/img/visits_graph_bg.png") center center no-repeat;
+}
+
+div#month-visits {
+    width: 940px;
+    height: 250px;
+    margin: 10px;
+}
+
+div#tag-cloud {
+    width: 940px;
+    height: 626px;
+}
+
+/* paging */
+#paging-left {
+    background-repeat: no-repeat;
+    width: 55px;
+    height: 41px;
+    cursor: pointer;
+    margin-left: 415px;
+    float: left;
+}
+
+.paging-left-inactive {
+    background: url('/static/img/paging_left.png');
+}
+
+.paging-left-active {
+    background: url('/static/img/paging_left_active.png');
+}
+
+#paging-right {
+    background-repeat: no-repeat;
+    width: 55px;
+    height: 41px;
+    bottom: 30px;
+    cursor: pointer;
+    float: left;
+}
+
+.paging-right-inactive {
+    background: url('/static/img/paging_right.png');
+}
+
+.paging-right-active {
+    background: url('/static/img/paging_right_active.png');
+}
+
+/* tag cloud */
+div.jqcloud {
+    text-shadow: #202020 2px 2px 2px;    
+}
+
+/* vertical tag cloud */
+div.jqcloud span.r1 {
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: tb-rl;
+}
+
+.slot {
+    background:url(/static/img/loader.gif) no-repeat center;
+}

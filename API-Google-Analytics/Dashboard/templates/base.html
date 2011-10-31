@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        
+        {% block meta %}
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <meta name="author" content="Johann Vivot">
+        {% endblock %}
+        
+        <title>{% block title %}Google Analytics Dashboard{% endblock %}</title>
+        
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        
+        {% block icon %}
+            <link rel="icon" type="image/png" href="/favicon.ico">
+        {% endblock %}
+        
+		{% block css %}
+			<link rel="stylesheet" type="text/css" href="/static/css/bootstrap/bootstrap.css" />
+			<link rel="stylesheet" type="text/css" href="/static/css/override.css" />
+			<link rel="stylesheet" type="text/css" href="/static/css/main.css" />
+        {% endblock %}
+        
+        {% block js %}
+			<script type="text/javascript" src="/static/js/jquery.js"></script>
+			<script type="text/javascript" src="/static/js/app.js"></script>
+			<script type="text/javascript" src="/static/js/jqcloud/jqcloud-0.2.4.min.js"></script>
+		{% endblock %}
+
+		{% block extra_head %}{% endblock %}		    
+    </head>
+
+	<body>
+		<div id="wrapper">
+			<header>
+				{% block header %}
+				{% endblock %}
+			</header>
+			<div class="container">
+				<div class="content"
+					{% block content %}{% endblock %}
+				</div>
+			</div>
+			<footer>
+				{% block footer %}{% endblock %}
+			</footer>
+		</div>
+	</body>
+</html>
+

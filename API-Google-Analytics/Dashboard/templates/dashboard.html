@@ -1,0 +1,83 @@
+﻿{% extends "base.html" %}
+
+{% block css %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="/static/css/jqcloud/jqcloud.css" />
+{% endblock %}
+
+
+{% block js %}
+	{{ block.super }}
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+		google.load('visualization', '1', {packages: ['corechart']});
+	</script>
+	
+	<!-- Charts Scripts -->
+	<script type="text/javascript" src="/static/js/slide_1.js"></script>
+	<script type="text/javascript" src="/static/js/slide_2.js"></script>
+	
+	<script type="text/javascript">
+	// Load draw function
+	google.setOnLoadCallback(draw_slides);	
+	
+	//Called by onload to start work
+	function draw_slides(){
+		dash.s1.draw();
+	}
+</script>
+{% endblock %}
+
+{% block content %}
+	
+	<!-- Slide 1 -->
+	<div id="slide-1">
+		<div id="row">
+			<div class="top-row">
+				<div class="title">
+					<h3>Visitas ano atual</h3>
+					<hr />
+				</div>
+				<div id="percent-current-year-vists" class="slot"></div>
+				<div id="total-visits">
+					<div class="year-inner-boxes">
+						<div class="inner-boxes-title">Visitas último ano</div>
+						<div id="last-year-visits" class="num-total-visits slot"></div>
+					</div>
+					<div class="year-inner-boxes">
+						<div class="inner-boxes-title">Visitas ano atual</div>
+						<div id="current-year-visits" class="num-total-visits slot"></div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="top-row">
+				<div class="title">
+					<h3>Novos visitantes / Retornantes</h3>
+					<hr />
+				</div>
+				<div id="last-month-visitors" class="slot"></div>
+				<div id="current-month-visitors" class="slot"></div>
+			</div>
+		</div>
+		
+		<div id="row">
+			<div id="chart">
+				<div id="chart-title">
+					<h3>Visitas mês atual</h3>
+					<hr />
+				</div>
+				<div id="month-visits" class="slot"></div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Slide 2 -->
+	<div id="slide-2" style="display: none;">
+		<div id="tag-cloud"></div>
+	</div>
+	<div>
+		<div id="paging-left" class="paging-left-inactive"></div>
+		<div id="paging-right" class="paging-right-inactive"></div>
+	</div>
+{% endblock %}
