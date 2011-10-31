@@ -1,0 +1,37 @@
+application: example-intercon-dashboard
+version: 1
+runtime: python
+api_version: 1
+
+admin_console:
+  pages:
+  - name: Status
+    url: /stats
+  - name: Clear Cache
+    url: /clear-cache
+
+handlers:
+- url: /favicon.ico
+  static_files: static/img/favicon.ico
+  upload: static/img/favicon.ico
+
+- url: /robots.txt
+  static_files: static/robots.txt
+  upload: static/robots.txt
+
+- url: /static
+  static_dir: static
+  
+- url: /dashboard.*
+  script: dashboard.py
+  login: required
+  
+- url: /data.*
+  script: data.py
+  login: required
+
+- url: /stats.*
+  script: $PYTHON_LIB/google/appengine/ext/appstats/ui.py
+
+- url: .*
+  script: main.py
